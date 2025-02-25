@@ -1,4 +1,8 @@
 package br.com.dev.danielsebastian.librarymanager.controller.response;
 
-public class BookResponse {
+public record BookResponse(Long id,
+                           String title,
+                           String author,
+                           String description,
+                           boolean status) {
 }
