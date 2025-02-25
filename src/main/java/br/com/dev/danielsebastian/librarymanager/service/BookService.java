@@ -8,6 +8,8 @@ import br.com.dev.danielsebastian.librarymanager.repository.BookRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class BookService {
@@ -18,5 +20,10 @@ public class BookService {
         Book book = BookMapper.toBook(bookRequest);
         Book saveBook = bookRepository.save(book);
         return BookMapper.toBookResponse(saveBook);
+    }
+
+    public List<BookResponse> getAllBook(){
+        List<Book> allBooks = bookRepository.findAll();
+        return allBooks.stream().map(BookMapper::toBookResponse).toList();
     }
 }
