@@ -24,6 +24,7 @@ public class Book {
 
     private String description;
 
-    private boolean status;
+    @Column(columnDefinition="char default t", nullable = false)
+    private char status;
 
 }
