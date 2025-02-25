@@ -2,15 +2,15 @@ spring:
   application:
     name: librarymanager
 
-datasource:
-  url: jdbc:postgresql://localhost:5431/librarymanager
-  username: postgres
-  password: postgres
-  driver-class-name: org.postgresql.Driver
+  datasource:
+    url: jdbc:postgresql://localhost:5431/librarymanager
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
 
-jpa:
-  database-platform: org.hibernate.dialect.PostgreSQLDialect
-  show-sql: true
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
 
-flyway:
-  enabled: true
+  flyway:
+    enabled: true
