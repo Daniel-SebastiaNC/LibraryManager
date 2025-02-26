@@ -1,0 +1,2 @@
+ALTER TABLE tb_book ALTER COLUMN status DROP DEFAULT;
+ALTER TABLE tb_book ALTER COLUMN status TYPE boolean USING (status::BOOLEAN);

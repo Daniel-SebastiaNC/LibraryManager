@@ -12,7 +12,6 @@ public class BookMapper {
                 .title(bookRequest.title())
                 .author(bookRequest.author())
                 .description(bookRequest.description())
-                .status('t')
                 .build();
     }
 
@@ -22,7 +21,7 @@ public class BookMapper {
                 .title(book.getTitle())
                 .author(book.getAuthor())
                 .description(book.getDescription())
-                .status(book.getStatus())
+                .available(book.isAvailable())
                 .build();
     }
 }

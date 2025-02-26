@@ -18,6 +18,7 @@ public class BookService {
 
     public BookResponse addBook(BookRequest bookRequest){
         Book book = BookMapper.toBook(bookRequest);
+        book.setAvailable(true);
         Book saveBook = bookRepository.save(book);
         return BookMapper.toBookResponse(saveBook);
     }
