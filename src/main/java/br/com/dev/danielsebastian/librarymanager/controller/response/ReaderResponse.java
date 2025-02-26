@@ -5,5 +5,7 @@ import lombok.Builder;
 import java.util.List;
 
 @Builder
-public record ReaderResponse(Long id, String name, List<BookResponse> bookResponse) {
+public record ReaderResponse(Long id,
+                             String name,
+                             List<BookResponse> books) {
 }
