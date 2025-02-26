@@ -28,4 +28,11 @@ public class ReaderService {
         return readerRepository.findAll().stream().map(ReaderMapper::toReaderResponse).toList();
     }
 
+    public ReaderResponse getReaderById(Long id) {
+        return ReaderMapper.toReaderResponse(this.readerInDb(id));
+    }
+
+    private Reader readerInDb(Long id){
+        return readerRepository.findById(id).orElseThrow(IllegalAccessError::new);
+    }
 }

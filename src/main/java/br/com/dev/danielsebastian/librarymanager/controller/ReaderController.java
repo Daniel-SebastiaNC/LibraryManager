@@ -26,4 +26,9 @@ public class ReaderController {
     public ResponseEntity<List<ReaderResponse>> getAllReader(){
         return ResponseEntity.ok(readerService.getAllReader());
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ReaderResponse> getReaderById(@PathVariable Long id){
+        return ResponseEntity.ok(readerService.getReaderById(id));
+    }
 }
