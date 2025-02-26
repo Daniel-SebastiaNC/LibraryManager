@@ -9,7 +9,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -29,6 +28,27 @@ public class BookService {
     }
 
     public BookResponse getBookById(Long id){
-        return bookRepository.findById(id).map(BookMapper::toBookResponse).orElseThrow(IllegalArgumentException::new);
+        return BookMapper.toBookResponse(this.bookInDB(id));
+    }
+
+    public BookResponse updateBook(Long id, BookRequest bookRequest){
+        Book book = this.bookInDB(id);
+
+        if(bookRequest.title() != null) {
+            book.setTitle(bookRequest.title());
+        }
+        if (bookRequest.author() != null){
+            book.setAuthor(bookRequest.author());
+        }
+        if (bookRequest.description() != null){
+            book.setDescription(bookRequest.description());
+        }
+
+        Book saveBook = bookRepository.save(book);
+        return BookMapper.toBookResponse(saveBook);
+    }
+
+    private Book bookInDB(Long id){
+        return bookRepository.findById(id).orElseThrow(IllegalArgumentException::new);
     }
 }
