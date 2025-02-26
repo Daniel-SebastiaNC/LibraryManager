@@ -1,5 +1,6 @@
 package br.com.dev.danielsebastian.librarymanager.controller;
 
+import br.com.dev.danielsebastian.librarymanager.controller.request.AvailableRequest;
 import br.com.dev.danielsebastian.librarymanager.controller.request.BookRequest;
 import br.com.dev.danielsebastian.librarymanager.controller.response.BookResponse;
 import br.com.dev.danielsebastian.librarymanager.service.BookService;
@@ -35,6 +36,11 @@ public class BookController {
     @PatchMapping("/alter/{id}")
     public ResponseEntity<BookResponse> updateBook(@PathVariable Long id, @RequestBody BookRequest bookRequest){
         return ResponseEntity.ok(bookService.updateBook(id, bookRequest));
+    }
+
+    @PatchMapping("/alter/available/{id}")
+    public ResponseEntity<BookResponse> changeAvailableBook(@PathVariable Long id, @RequestBody AvailableRequest availableRequest){
+        return ResponseEntity.ok(bookService.changeAvailableBook(id, availableRequest));
     }
 
 }

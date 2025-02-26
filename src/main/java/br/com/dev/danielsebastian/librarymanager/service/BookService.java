@@ -1,5 +1,6 @@
 package br.com.dev.danielsebastian.librarymanager.service;
 
+import br.com.dev.danielsebastian.librarymanager.controller.request.AvailableRequest;
 import br.com.dev.danielsebastian.librarymanager.controller.request.BookRequest;
 import br.com.dev.danielsebastian.librarymanager.controller.response.BookResponse;
 import br.com.dev.danielsebastian.librarymanager.entity.Book;
@@ -46,6 +47,15 @@ public class BookService {
         }
 
         Book saveBook = bookRepository.save(book);
+        return BookMapper.toBookResponse(saveBook);
+    }
+
+    public BookResponse changeAvailableBook(Long id, AvailableRequest availableRequest){
+        Book book = this.bookInDB(id);
+        book.setAvailable(availableRequest.available());
+
+        Book saveBook = bookRepository.save(book);
+
         return BookMapper.toBookResponse(saveBook);
     }
 
