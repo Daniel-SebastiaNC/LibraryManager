@@ -62,4 +62,9 @@ public class BookService {
     private Book bookInDB(Long id){
         return bookRepository.findById(id).orElseThrow(IllegalArgumentException::new);
     }
+
+    public void deleteBookById(Long id) {
+        Book book = this.bookInDB(id);
+        bookRepository.delete(book);
+    }
 }
