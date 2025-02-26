@@ -27,4 +27,8 @@ public class Book {
     @Column(columnDefinition="boolean default true", nullable = false)
     private boolean available;
 
+    @ManyToOne
+    @JoinColumn(name = "reader_id")
+    private Reader reader;
+
 }
