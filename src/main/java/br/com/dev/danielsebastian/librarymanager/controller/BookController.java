@@ -1,7 +1,7 @@
 package br.com.dev.danielsebastian.librarymanager.controller;
 
-import br.com.dev.danielsebastian.librarymanager.controller.request.AvailableRequest;
 import br.com.dev.danielsebastian.librarymanager.controller.request.BookRequest;
+import br.com.dev.danielsebastian.librarymanager.controller.request.StoreBookReaderRequest;
 import br.com.dev.danielsebastian.librarymanager.controller.response.BookResponse;
 import br.com.dev.danielsebastian.librarymanager.service.BookService;
 import lombok.RequiredArgsConstructor;
@@ -38,9 +38,14 @@ public class BookController {
         return ResponseEntity.ok(bookService.updateBook(id, bookRequest));
     }
 
-    @PatchMapping("/alter/available/{id}")
-    public ResponseEntity<BookResponse> changeAvailableBook(@PathVariable Long id, @RequestBody AvailableRequest availableRequest){
-        return ResponseEntity.ok(bookService.changeAvailableBook(id, availableRequest));
+    @PatchMapping("/take")
+    public ResponseEntity<BookResponse> takeBook(@RequestBody StoreBookReaderRequest storeBookReaderRequest){
+        return ResponseEntity.ok(bookService.changeAvailableFalseBook(storeBookReaderRequest));
+    }
+
+    @PatchMapping("/return")
+    public ResponseEntity<BookResponse> returnBook(@RequestBody StoreBookReaderRequest storeBookReaderRequest){
+        return ResponseEntity.ok(bookService.changeAvailableTrueBook(storeBookReaderRequest.bookId()));
     }
 
     @DeleteMapping("/delete/{id}")

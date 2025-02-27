@@ -1,11 +1,13 @@
 package br.com.dev.danielsebastian.librarymanager.service;
 
-import br.com.dev.danielsebastian.librarymanager.controller.request.AvailableRequest;
 import br.com.dev.danielsebastian.librarymanager.controller.request.BookRequest;
+import br.com.dev.danielsebastian.librarymanager.controller.request.StoreBookReaderRequest;
 import br.com.dev.danielsebastian.librarymanager.controller.response.BookResponse;
 import br.com.dev.danielsebastian.librarymanager.entity.Book;
+import br.com.dev.danielsebastian.librarymanager.entity.Reader;
 import br.com.dev.danielsebastian.librarymanager.mapper.BookMapper;
 import br.com.dev.danielsebastian.librarymanager.repository.BookRepository;
+import br.com.dev.danielsebastian.librarymanager.repository.ReaderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,7 @@ import java.util.List;
 public class BookService {
 
     private final BookRepository bookRepository;
+    private final ReaderRepository readerRepository;
 
     public BookResponse addBook(BookRequest bookRequest){
         Book book = BookMapper.toBook(bookRequest);
@@ -50,21 +53,40 @@ public class BookService {
         return BookMapper.toBookResponse(saveBook);
     }
 
-    public BookResponse changeAvailableBook(Long id, AvailableRequest availableRequest){
+    public BookResponse changeAvailableTrueBook(Long id){
         Book book = this.bookInDB(id);
-        book.setAvailable(availableRequest.available());
+        
+        book.setAvailable(true);
+        book.setReader(null);
+
+        Book saveBook = bookRepository.save(book);
+
+        return BookMapper.toBookResponse(saveBook);
+    }
+    
+    public BookResponse changeAvailableFalseBook(StoreBookReaderRequest storeBookReaderRequest){
+        Book book = this.bookInDB(storeBookReaderRequest.bookId());
+        Reader reader = this.readerInDb(storeBookReaderRequest.readerId());
+
+        book.setReader(reader);
+        book.setAvailable(false);
 
         Book saveBook = bookRepository.save(book);
 
         return BookMapper.toBookResponse(saveBook);
     }
 
-    private Book bookInDB(Long id){
-        return bookRepository.findById(id).orElseThrow(IllegalArgumentException::new);
-    }
-
     public void deleteBookById(Long id) {
         Book book = this.bookInDB(id);
         bookRepository.delete(book);
     }
+
+    private Book bookInDB(Long bookId){
+        return bookRepository.findById(bookId).orElseThrow(IllegalArgumentException::new);
+    }
+
+    private Reader readerInDb(Long readerId){
+        return readerRepository.findById(readerId).orElseThrow(IllegalAccessError::new);
+    }
+
 }
