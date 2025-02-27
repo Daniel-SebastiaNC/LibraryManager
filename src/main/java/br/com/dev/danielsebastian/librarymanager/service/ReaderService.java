@@ -15,6 +15,7 @@ import java.util.List;
 public class ReaderService {
 
     private final ReaderRepository readerRepository;
+    private final BookService bookService;
 
     public ReaderResponse addReader(ReaderRequest readerRequest){
         Reader reader = ReaderMapper.toReader(readerRequest);
@@ -30,6 +31,15 @@ public class ReaderService {
 
     public ReaderResponse getReaderById(Long id) {
         return ReaderMapper.toReaderResponse(this.readerInDb(id));
+    }
+
+    public void deleteReaderById(Long id) {
+        Reader reader = this.readerInDb(id);
+        if (reader.getBooks() != null) {
+            reader.getBooks().stream().forEach(book -> bookService.changeAvailableTrueBook(book.getId()));
+        }
+
+        readerRepository.delete(reader);
     }
 
     private Reader readerInDb(Long id){

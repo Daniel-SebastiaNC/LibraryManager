@@ -31,4 +31,10 @@ public class ReaderController {
     public ResponseEntity<ReaderResponse> getReaderById(@PathVariable Long id){
         return ResponseEntity.ok(readerService.getReaderById(id));
     }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void> deleteReaderById(@PathVariable Long id){
+        readerService.deleteReaderById(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
 }
