@@ -3,6 +3,7 @@ package br.com.dev.danielsebastian.librarymanager.controller;
 import br.com.dev.danielsebastian.librarymanager.controller.request.ReaderRequest;
 import br.com.dev.danielsebastian.librarymanager.controller.response.ReaderResponse;
 import br.com.dev.danielsebastian.librarymanager.service.ReaderService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,7 @@ public class ReaderController {
     private final ReaderService readerService;
 
     @PostMapping("/add")
-    public ResponseEntity<ReaderResponse> addReader(@RequestBody ReaderRequest readerRequest){
+    public ResponseEntity<ReaderResponse> addReader(@Valid @RequestBody ReaderRequest readerRequest){
         return ResponseEntity.status(HttpStatus.CREATED).body(readerService.addReader(readerRequest));
     }
 

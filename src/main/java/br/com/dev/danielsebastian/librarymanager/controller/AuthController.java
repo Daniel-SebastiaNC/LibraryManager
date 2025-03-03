@@ -8,6 +8,7 @@ import br.com.dev.danielsebastian.librarymanager.controller.response.UserRespons
 import br.com.dev.danielsebastian.librarymanager.entity.User;
 import br.com.dev.danielsebastian.librarymanager.exception.UsernameOrPasswordInvaldException;
 import br.com.dev.danielsebastian.librarymanager.service.UserService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,12 +31,12 @@ public class AuthController {
     private final TokenService tokenService;
 
     @PostMapping("/register")
-    public ResponseEntity<UserResponse> registerUser(@RequestBody UserRequest userRequest) {
+    public ResponseEntity<UserResponse> registerUser(@Valid @RequestBody UserRequest userRequest) {
         return ResponseEntity.status(HttpStatus.CREATED).body(userService.redisterUser(userRequest));
     }
 
     @PostMapping("/login")
-    public ResponseEntity<UserLoginResponse> login(@RequestBody UserLoginRequest userLoginRequest){
+    public ResponseEntity<UserLoginResponse> login(@Valid @RequestBody UserLoginRequest userLoginRequest){
         try {
 
         UsernamePasswordAuthenticationToken userAndPass = new UsernamePasswordAuthenticationToken(userLoginRequest.email(), userLoginRequest.password());

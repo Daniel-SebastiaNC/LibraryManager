@@ -4,6 +4,7 @@ import br.com.dev.danielsebastian.librarymanager.controller.request.BookRequest;
 import br.com.dev.danielsebastian.librarymanager.controller.request.StoreBookReaderRequest;
 import br.com.dev.danielsebastian.librarymanager.controller.response.BookResponse;
 import br.com.dev.danielsebastian.librarymanager.service.BookService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +20,7 @@ public class BookController {
     private final BookService bookService;
 
     @PostMapping("/add")
-    public ResponseEntity<BookResponse> addBook(@RequestBody BookRequest bookRequest){
+    public ResponseEntity<BookResponse> addBook(@Valid @RequestBody BookRequest bookRequest){
         return ResponseEntity.status(HttpStatus.CREATED).body(bookService.addBook(bookRequest));
     }
 
@@ -33,8 +34,8 @@ public class BookController {
         return ResponseEntity.ok(bookService.getBookById(id));
     }
 
-    @PatchMapping("/alter/{id}")
-    public ResponseEntity<BookResponse> updateBook(@PathVariable Long id, @RequestBody BookRequest bookRequest){
+    @PutMapping("/alter/{id}")
+    public ResponseEntity<BookResponse> updateBook(@PathVariable Long id, @Valid @RequestBody BookRequest bookRequest){
         return ResponseEntity.ok(bookService.updateBook(id, bookRequest));
     }
 

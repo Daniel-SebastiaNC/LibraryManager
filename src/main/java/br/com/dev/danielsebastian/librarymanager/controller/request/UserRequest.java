@@ -1,4 +1,8 @@
 package br.com.dev.danielsebastian.librarymanager.controller.request;
 
-public record UserRequest(String name, String email, String password) {
+import jakarta.validation.constraints.NotEmpty;
+
+public record UserRequest(@NotEmpty(message = "required") String name,
+                          @NotEmpty(message = "required") String email,
+                          @NotEmpty(message = "required") String password) {
 }
