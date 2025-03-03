@@ -14,3 +14,8 @@ spring:
 
   flyway:
     enabled: true
+
+
+librarymanager:
+  security:
+    secret: "8f6760ab700b1a09b93356ba47e2cfc7e6f1af7baf9e1f7ce4dd44b97a45b328"
