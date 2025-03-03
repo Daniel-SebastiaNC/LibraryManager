@@ -3,6 +3,7 @@ package br.com.dev.danielsebastian.librarymanager.service;
 import br.com.dev.danielsebastian.librarymanager.controller.request.ReaderRequest;
 import br.com.dev.danielsebastian.librarymanager.controller.response.ReaderResponse;
 import br.com.dev.danielsebastian.librarymanager.entity.Reader;
+import br.com.dev.danielsebastian.librarymanager.exception.DataNotFoundException;
 import br.com.dev.danielsebastian.librarymanager.mapper.ReaderMapper;
 import br.com.dev.danielsebastian.librarymanager.repository.ReaderRepository;
 import lombok.RequiredArgsConstructor;
@@ -43,6 +44,6 @@ public class ReaderService {
     }
 
     private Reader readerInDb(Long id){
-        return readerRepository.findById(id).orElseThrow(IllegalAccessError::new);
+        return readerRepository.findById(id).orElseThrow(() -> new DataNotFoundException("Reader not found"));
     }
 }

@@ -5,6 +5,7 @@ import br.com.dev.danielsebastian.librarymanager.controller.request.StoreBookRea
 import br.com.dev.danielsebastian.librarymanager.controller.response.BookResponse;
 import br.com.dev.danielsebastian.librarymanager.entity.Book;
 import br.com.dev.danielsebastian.librarymanager.entity.Reader;
+import br.com.dev.danielsebastian.librarymanager.exception.DataNotFoundException;
 import br.com.dev.danielsebastian.librarymanager.mapper.BookMapper;
 import br.com.dev.danielsebastian.librarymanager.repository.BookRepository;
 import br.com.dev.danielsebastian.librarymanager.repository.ReaderRepository;
@@ -82,11 +83,11 @@ public class BookService {
     }
 
     private Book bookInDB(Long bookId){
-        return bookRepository.findById(bookId).orElseThrow(IllegalArgumentException::new);
+        return bookRepository.findById(bookId).orElseThrow(() -> new DataNotFoundException("Book not found"));
     }
 
     private Reader readerInDb(Long readerId){
-        return readerRepository.findById(readerId).orElseThrow(IllegalAccessError::new);
+        return readerRepository.findById(readerId).orElseThrow(() -> new DataNotFoundException("Reader not found"));
     }
 
 }

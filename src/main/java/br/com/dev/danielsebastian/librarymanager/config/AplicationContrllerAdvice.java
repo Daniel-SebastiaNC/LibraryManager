@@ -1,5 +1,6 @@
 package br.com.dev.danielsebastian.librarymanager.config;
 
+import br.com.dev.danielsebastian.librarymanager.exception.DataNotFoundException;
 import br.com.dev.danielsebastian.librarymanager.exception.UsernameOrPasswordInvaldException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -15,5 +16,10 @@ public class AplicationContrllerAdvice {
         return ex.getMessage();
     }
 
+    @ExceptionHandler(DataNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public String handleDataNotFoundException(DataNotFoundException ex){
+        return ex.getMessage();
+    }
 
 }
