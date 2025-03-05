@@ -1,6 +1,7 @@
 package br.com.dev.danielsebastian.librarymanager.controller;
 
 import br.com.dev.danielsebastian.librarymanager.config.TokenService;
+import br.com.dev.danielsebastian.librarymanager.controller.doc.AuthControllerDoc;
 import br.com.dev.danielsebastian.librarymanager.controller.request.UserLoginRequest;
 import br.com.dev.danielsebastian.librarymanager.controller.request.UserRequest;
 import br.com.dev.danielsebastian.librarymanager.controller.response.UserLoginResponse;
@@ -24,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
-public class AuthController {
+public class AuthController implements AuthControllerDoc {
 
     private final UserService userService;
     private final AuthenticationManager authenticationManager;
