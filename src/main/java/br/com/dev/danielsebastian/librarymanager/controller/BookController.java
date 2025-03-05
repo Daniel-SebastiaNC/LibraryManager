@@ -40,12 +40,12 @@ public class BookController implements BookControllerDoc {
         return ResponseEntity.ok(bookService.updateBook(id, bookRequest));
     }
 
-    @PatchMapping("/take")
+    @PutMapping("/take")
     public ResponseEntity<BookResponse> takeBook(@RequestBody StoreBookReaderRequest storeBookReaderRequest){
         return ResponseEntity.ok(bookService.changeAvailableFalseBook(storeBookReaderRequest));
     }
 
-    @PatchMapping("/return")
+    @PutMapping("/return")
     public ResponseEntity<BookResponse> returnBook(@RequestBody StoreBookReaderRequest storeBookReaderRequest){
         return ResponseEntity.ok(bookService.changeAvailableTrueBook(storeBookReaderRequest.bookId()));
     }
