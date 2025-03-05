@@ -1,5 +1,6 @@
 package br.com.dev.danielsebastian.librarymanager.controller;
 
+import br.com.dev.danielsebastian.librarymanager.controller.doc.ReaderControllerDoc;
 import br.com.dev.danielsebastian.librarymanager.controller.request.ReaderRequest;
 import br.com.dev.danielsebastian.librarymanager.controller.response.ReaderResponse;
 import br.com.dev.danielsebastian.librarymanager.service.ReaderService;
@@ -14,7 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/reader")
 @RequiredArgsConstructor
-public class ReaderController {
+public class ReaderController implements ReaderControllerDoc {
 
     private final ReaderService readerService;
 
