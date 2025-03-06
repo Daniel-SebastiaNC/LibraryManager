@@ -1,7 +1,5 @@
-package br.com.dev.danielsebastian.librarymanager.config;
+package br.com.dev.danielsebastian.librarymanager.exception;
 
-import br.com.dev.danielsebastian.librarymanager.exception.DataNotFoundException;
-import br.com.dev.danielsebastian.librarymanager.exception.UsernameOrPasswordInvaldException;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -13,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestControllerAdvice
-public class AplicationContrllerAdvice {
+public class AplicationControllerAdvice {
 
     @ExceptionHandler(UsernameOrPasswordInvaldException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
