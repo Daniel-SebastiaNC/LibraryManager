@@ -34,6 +34,11 @@ public class ReaderController implements ReaderControllerDoc {
         return ResponseEntity.ok(readerService.getReaderById(id));
     }
 
+    @PutMapping("/alter/{id}")
+    public ResponseEntity<ReaderResponse> updateReader(@PathVariable Long id, @RequestBody ReaderRequest readerRequest){
+        return ResponseEntity.ok(readerService.updateReader(id, readerRequest));
+    }
+
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteReaderById(@PathVariable Long id){
         readerService.deleteReaderById(id);

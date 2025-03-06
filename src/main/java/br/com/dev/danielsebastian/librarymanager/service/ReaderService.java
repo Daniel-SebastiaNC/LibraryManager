@@ -34,6 +34,17 @@ public class ReaderService {
         return ReaderMapper.toReaderResponse(this.readerInDb(id));
     }
 
+    public ReaderResponse updateReader(Long id, ReaderRequest readerRequest) {
+        Reader reader = this.readerInDb(id);
+
+        if (readerRequest.name() != null) {
+            reader.setName(readerRequest.name());
+        }
+
+        Reader saveReader = readerRepository.save(reader);
+        return ReaderMapper.toReaderResponse(saveReader);
+    }
+
     public void deleteReaderById(Long id) {
         Reader reader = this.readerInDb(id);
         if (reader.getBooks() != null) {
@@ -46,4 +57,6 @@ public class ReaderService {
     private Reader readerInDb(Long id){
         return readerRepository.findById(id).orElseThrow(() -> new DataNotFoundException("Reader not found"));
     }
+
+
 }
