@@ -1,6 +1,7 @@
 package br.com.dev.danielsebastian.librarymanager.controller.doc;
 
 import br.com.dev.danielsebastian.librarymanager.controller.request.ReaderRequest;
+import br.com.dev.danielsebastian.librarymanager.controller.response.BookResponse;
 import br.com.dev.danielsebastian.librarymanager.controller.response.ReaderResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -46,6 +47,17 @@ public interface ReaderControllerDoc {
             content = @Content(schema = @Schema(implementation = String.class)))
     ResponseEntity<ReaderResponse> getReaderById(@PathVariable Long id);
 
+    @Operation(summary = "Modificar Leitor por Id",
+            description = "Método responsável por modificar um leitor existente no sistema com Id específico.",
+            security = @SecurityRequirement(name = "bearerAuth"))
+    @ApiResponse(responseCode = "200",
+            description = "Retorna leitor modificado.",
+            content = @Content(schema = @Schema(implementation = BookResponse.class)))
+    @ApiResponse(responseCode = "404",
+            description = "Leitor não encontrado",
+            content = @Content(schema = @Schema(implementation = String.class)))
+    ResponseEntity<ReaderResponse> updateReader(@PathVariable Long id, @RequestBody ReaderRequest readerRequest);
+
     @Operation(summary = "Deletar Leitor por Id",
             description = "Método responsável por deletar leitor cadastrado com Id específico.",
             security = @SecurityRequirement(name = "bearerAuth"))
@@ -53,7 +65,7 @@ public interface ReaderControllerDoc {
             description = "Leitor deletado.",
             content = @Content())
     @ApiResponse(responseCode = "404",
-            description = "Livro não encontrado",
+            description = "Leitor não encontrado",
             content = @Content(schema = @Schema(implementation = String.class)))
     ResponseEntity<Void> deleteReaderById(@PathVariable Long id);
 }
